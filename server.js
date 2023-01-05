@@ -21,20 +21,25 @@ app.use(express.json());
 
 // create first endpoint - uri/url, callback request, response
 app.post("/dream", async (req, res) => {
-  const prompt = req.body.prompt;
-  // access the prompt-desc of the image the user wants to generate
-  const aiResponse = await openai.createImage({
-    prompt,
-    // number of images to generate
-    n: 1,
-    // resolution of image
-    size: "1024x1024",
-  });
+  try {
+    const prompt = req.body.prompt;
+    // access the prompt-desc of the image the user wants to generate
+    const aiResponse = await openai.createImage({
+      prompt,
+      // number of images to generate
+      n: 1,
+      // resolution of image
+      size: "1024x1024",
+    });
 
-  // response object from openai
-  const image = aiResponse.data.data[0].url;
-  // use the send method on the response object to send it to the client as a response as json
-  res.send({ image });
+    // response object from openai
+    const image = aiResponse.data.data[0].url;
+    // use the send method on the response object to send it to the client as a response as json
+    res.send({ image });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error?.response.data.error.message || "Something went wrong");
+  }
 });
 
 // launch server

@@ -7,6 +7,9 @@ form.addEventListener("submit", async (event) => {
   // prevent the form from refreshing the entire page
   event.preventDefault();
 
+  // load/show spinner
+  showSpinner();
+
   // extract the data from the form
   const data = new FormData(form);
 
@@ -21,9 +24,31 @@ form.addEventListener("submit", async (event) => {
     }),
   });
 
-  const { image } = await response.json();
+  // handle errors
+  if (response.ok) {
+    const { image } = await response.json();
 
-  // send it back to the DOM
-  const result = document.querySelector("#result");
-  result.innerHTML = `<img src="${image}" width="512" />`;
+    // send it back to the DOM
+    const result = document.querySelector("#result");
+    result.innerHTML = `<img src="${image}" width="512" />`;
+  } else {
+    const err = await response.text();
+    alert(err);
+    console.error(err);
+  }
+
+  // hide spinner
+  hideSpinner();
 });
+
+function showSpinner() {
+  const button = document.querySelector("button");
+  button.disabled = true;
+  button.innerHTML = 'Generating... <span class="spinner">🧠</span>';
+}
+
+function hideSpinner() {
+  const button = document.querySelector("button");
+  button.disabled = false;
+  button.innerHTML = "Generate Image";
+}
