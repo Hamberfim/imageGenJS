@@ -1,1 +1,1 @@
-# imageGenJS
+### Image Generator in JS
