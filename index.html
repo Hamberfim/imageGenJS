@@ -4,10 +4,32 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <style></style>
+    <title>Ai Image Generator</title>
   </head>
   <body>
-    <div id="app"></div>
+    <main class="container">
+      <h1 class="display-4 text-primary">Ai Photo Generator</h1>
+      <div id="results" class="text-muted ms-3 mb-2">Generated Image Will Appear Here</div>
+      <form>
+        <label for="prompt" class="h5">Describe the image you want generated:</label>
+        <p>
+          <textarea name="prompt" rows="5" cols="40" maxlength="160"></textarea>
+        </p>
+        <p><button class="btn btn-primary" type="submit">Generate Image</button></p>
+      </form>
+    </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
