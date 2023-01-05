@@ -19,8 +19,8 @@ app.use(cors());
 // middleware - json format only
 app.use(express.json());
 
-// first endpoint - uri/url, callback request, response
-app.post("/dream", async (req, res) => {
+// create first endpoint - uri/url, callback request, response
+app.post("/img-gen", async (req, res) => {
   // access the prompt-desc of the image the user wants to generate
   const aiResponse = await openai.createImage({
     prompt,
@@ -34,3 +34,6 @@ app.post("/dream", async (req, res) => {
   // use the send method on the response object to send it to the client as a response as json
   res.send({ image });
 });
+
+// launch server
+app.listen(8080, () => console.log("making ai art on http://localhost:8080/img-gen"));
